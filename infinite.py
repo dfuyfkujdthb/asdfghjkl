@@ -6,7 +6,7 @@ import requests
 def telegram_bot_sendtext(bot_message):
     
     bot_token = '1193133723:AAEYOyi1qAOPNBsQMknpc6CnIXr33G7t4Ts'
-    bot_chatID = '1193133723'
+    bot_chatID = '772671984'
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
 
     response = requests.get(send_text)
@@ -21,7 +21,7 @@ def report():
 
 
     
-schedule.every().day.at("02:12").do(report)
+schedule.every().day.at("02:27").do(report)
 
 while True:
     schedule.run_pending()
