@@ -1,17 +1,28 @@
-# Python3 code to demonstrate 
-# generating random strings 
-# using secrets.choice() 
-import secrets 
-import string 
-
-# initializing size of string 
-N = 22
-
-# using random.choices() 
-# generating random strings 
-res = ''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase + "-"+ "_"+ string.digits ) 
-												for i in range(N)) 
+import time
+import schedule
+import requests
 
 
-print("https://www.acko.tech/amazon-mobile/download-policy/" + str(res)) 
+def telegram_bot_sendtext(bot_message):
+    
+    bot_token = '1193133723:AAEYOyi1qAOPNBsQMknpc6CnIXr33G7t4Ts'
+    bot_chatID = '1193133723'
+    send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
 
+    response = requests.get(send_text)
+
+    return response.json()
+
+
+def report():
+    my_balance = 10   ## Replace this number with an API call to fetch your account balance
+    my_message = "Current balance is: {}".format(my_balance)   ## Customize your message
+    telegram_bot_sendtext(my_message)
+
+
+    
+schedule.every().day.at("02:12").do(report)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
